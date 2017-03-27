@@ -9,10 +9,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.SessionFactory;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
@@ -23,24 +23,22 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
+@ComponentScan("com.jpmorgan.cakeshop.node.manager.db.entity")
 public abstract class AbstractDataSourceConfig implements ApplicationContextAware {
 
     protected static final org.slf4j.Logger LOG = LoggerFactory.getLogger(AbstractDataSourceConfig.class);
-    private final String JNDI_NAME_PROP = "cakeshop.jndi.name";
+    private final String JNDI_NAME_PROP = "node-manager.jndi.name";
     private final String JNDI_NAME = System.getProperty(JNDI_NAME_PROP);
 
-    protected final String JDBC_URL = "cakeshop.jdbc.url";
-    protected final String JDBC_USER = "cakeshop.jdbc.user";
-    protected final String JDBC_PASS = "cakeshop.jdbc.pass";
-    protected final String HBM_2DDL_AUTO = "cakeshop.hibernate.hbm2ddl.auto";
-    protected final String HIBERNATE_DIALECT = "cakeshop.hibernate.dialect";
-    public static final String JDBC_BATCH_SIZE = "cakeshop.hibernate.jdbc.batch_size";
+    protected final String JDBC_URL = "node-manager.jdbc.url";
+    protected final String JDBC_USER = "node-manager.jdbc.user";
+    protected final String JDBC_PASS = "node-manager.jdbc.pass";
+    protected final String HBM_2DDL_AUTO = "node-manager.hibernate.hbm2ddl.auto";
+    protected final String HIBERNATE_DIALECT = "node-manager.hibernate.dialect";
+    public static final String JDBC_BATCH_SIZE = "node-manager.hibernate.jdbc.batch_size";
 
     @Autowired
     protected Environment env;
-
-    @Value("${config.path}")
-    protected String CONFIG_ROOT;
 
     protected ApplicationContext applicationContext;
 
@@ -53,7 +51,7 @@ public abstract class AbstractDataSourceConfig implements ApplicationContextAwar
     public LocalSessionFactoryBean sessionFactory() throws ClassNotFoundException, NamingException {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan(new String[]{"com.jpmorgan.cakeshop.model"});
+        sessionFactory.setPackagesToScan(new String[]{"com.jpmorgan.cakeshop.node.manager.db.entity"});
         sessionFactory.setHibernateProperties(hibernateProperties());
 
         return sessionFactory;
