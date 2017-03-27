@@ -27,9 +27,9 @@ public interface NodeManagerService {
 
     public APIResponse<APIData<SimpleResult>, Boolean> constellationList(final String cakeshopUrl, final String cred1, final String cred2);
 
-    public APIResponse<APIData<SimpleResult>, Boolean> addConstellation(final String cakeshopUrl, final String cred1, final String cred2, final NodeUpdateCommand command);
+    public APIResponse<APIData<Node>, Node> addConstellation(final String cakeshopUrl, final String cred1, final String cred2, final NodeUpdateCommand command);
 
-    public APIResponse<APIData<SimpleResult>, Boolean> removeConstellationNode(final String cakeshopUrl, final String cred1, final String cred2, final NodeUpdateCommand command);
+    public APIResponse<APIData<Node>, Node> removeConstellationNode(final String cakeshopUrl, final String cred1, final String cred2, final NodeUpdateCommand command);
 
     public APIResponse<APIData<SimpleResult>, Boolean> stopConstellation(final String cakeshopUrl, final String cred1, final String cred2);
 

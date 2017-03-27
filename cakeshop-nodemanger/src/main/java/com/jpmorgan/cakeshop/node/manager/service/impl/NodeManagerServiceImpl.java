@@ -51,12 +51,12 @@ public class NodeManagerServiceImpl implements NodeManagerService {
     }
 
     @Override
-    public APIResponse<APIData<SimpleResult>, Boolean> addConstellation(final String cakeshopUrl, final String cred1, final String cred2, final NodeUpdateCommand command) {
+    public APIResponse<APIData<Node>, Node> addConstellation(final String cakeshopUrl, final String cred1, final String cred2, final NodeUpdateCommand command) {
         return getNodeApi(cakeshopUrl, cred1, cred2).addConstellation(command);
     }
 
     @Override
-    public APIResponse<APIData<SimpleResult>, Boolean> removeConstellationNode(final String cakeshopUrl, final String cred1, final String cred2, final NodeUpdateCommand command) {
+    public APIResponse<APIData<Node>, Node> removeConstellationNode(final String cakeshopUrl, final String cred1, final String cred2, final NodeUpdateCommand command) {
         return getNodeApi(cakeshopUrl, cred1, cred2).removeConstellationNode(command);
     }
 
