@@ -27,15 +27,15 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public abstract class AbstractDataSourceConfig implements ApplicationContextAware {
 
     protected static final org.slf4j.Logger LOG = LoggerFactory.getLogger(AbstractDataSourceConfig.class);
-    private final String JNDI_NAME_PROP = "node-manager.jndi.name";
+    private final String JNDI_NAME_PROP = "nodemanager.jndi.name";
     private final String JNDI_NAME = System.getProperty(JNDI_NAME_PROP);
 
-    protected final String JDBC_URL = "node-manager.jdbc.url";
-    protected final String JDBC_USER = "node-manager.jdbc.user";
-    protected final String JDBC_PASS = "node-manager.jdbc.pass";
-    protected final String HBM_2DDL_AUTO = "node-manager.hibernate.hbm2ddl.auto";
-    protected final String HIBERNATE_DIALECT = "node-manager.hibernate.dialect";
-    public static final String JDBC_BATCH_SIZE = "node-manager.hibernate.jdbc.batch_size";
+    protected final String JDBC_URL = "nodemanager.jdbc.url";
+    protected final String JDBC_USER = "nodemanager.jdbc.user";
+    protected final String JDBC_PASS = "nodemanager.jdbc.pass";
+    protected final String HBM_2DDL_AUTO = "nodemanager.hibernate.hbm2ddl.auto";
+    protected final String HIBERNATE_DIALECT = "nodemanager.hibernate.dialect";
+    public static final String JDBC_BATCH_SIZE = "nodemanager.hibernate.jdbc.batch_size";
 
     @Autowired
     protected Environment env;

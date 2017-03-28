@@ -13,8 +13,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
-@Conditional(PostgresDataSourceConditon.class)
 @Configuration
+@Conditional(PostgresDataSourceConditon.class)
 public class PostgresDataSourceConfig extends AbstractDataSourceConfig {
 
     @Bean
@@ -24,7 +24,7 @@ public class PostgresDataSourceConfig extends AbstractDataSourceConfig {
 
     @Override
     protected Properties hibernateProperties() {
-        LOG.debug("USING POSTGRES HIBERNATE DIALECT");
+        LOG.info("USING POSTGRES HIBERNATE DIALECT");
         return new Properties() {
             {
                 setProperty("hibernate.jdbc.batch_size",
@@ -35,7 +35,7 @@ public class PostgresDataSourceConfig extends AbstractDataSourceConfig {
                         ? System.getProperty(HBM_2DDL_AUTO) : env.getProperty(HBM_2DDL_AUTO, "update"));
                 setProperty("hibernate.dialect",
                         StringUtils.isNotBlank(System.getProperty(HIBERNATE_DIALECT))
-                        ? System.getProperty(HIBERNATE_DIALECT) : env.getProperty(HIBERNATE_DIALECT, "org.hibernate.dialect.PostgreSQL82Dialect"));
+                        ? System.getProperty(HIBERNATE_DIALECT) : env.getProperty(HIBERNATE_DIALECT, "org.hibernate.dialect.PostgreSQLDialect"));
             }
         };
     }

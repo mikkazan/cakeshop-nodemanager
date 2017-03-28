@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.jpmorgan.cakeshop.node.manager.db.entity;
 
 import javax.persistence.Entity;
@@ -18,6 +13,9 @@ public class RemoteNode {
     @Id
     private String id;
     private String url;
+    private String constellationUrl;
+    private String nodeAddress;
+    private Boolean clustered = false;
 
     /**
      * @return the id
@@ -40,11 +38,38 @@ public class RemoteNode {
         return url;
     }
 
-    /**
-     * @param url the url to set
-     */
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getConstellationUrl() {
+        return constellationUrl;
+    }
+
+    public void setConstellationUrl(String constellationUrl) {
+        this.constellationUrl = constellationUrl;
+    }
+
+    /**
+     * @return the nodeAddress
+     */
+    public String getNodeAddress() {
+        return nodeAddress;
+    }
+
+    /**
+     * @param nodeAddress the nodeAddress to set
+     */
+    public void setNodeAddress(String nodeAddress) {
+        this.nodeAddress = nodeAddress;
+    }
+
+    public Boolean isClustered() {
+        return clustered;
+    }
+
+    public void setIsClustered(Boolean isClustered) {
+        this.clustered = isClustered;
     }
 
 }

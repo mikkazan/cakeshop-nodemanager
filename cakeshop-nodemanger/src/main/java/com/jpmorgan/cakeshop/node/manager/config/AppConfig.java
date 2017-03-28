@@ -6,12 +6,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jpmorgan.cakeshop.client.model.res.APIResponse;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
-import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -23,11 +20,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class AppConfig extends WebMvcConfigurerAdapter {
 
     @Bean
-    public EmbeddedServletContainerFactory servletContainer() {
-        TomcatEmbeddedServletContainerFactory factory
-                = new TomcatEmbeddedServletContainerFactory();
-        factory.setSessionTimeout(15, TimeUnit.MINUTES);
-        return factory;
+    public static PropertySourcesPlaceholderConfigurer
+            propertySourcesPlaceholderConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
     }
 
     @Override

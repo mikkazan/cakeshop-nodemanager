@@ -37,7 +37,7 @@ public class EmbeddedDbDataSourceConfig implements ApplicationContextAware {
 
     protected static final org.slf4j.Logger LOG = LoggerFactory.getLogger(EmbeddedDbDataSourceConfig.class);
 
-    @Value("${hibernate.hbm2ddl.auto:update}")
+    @Value("${hibernate.hbm2ddl.auto:validate}")
     private String hibernateAuto;
 
     @Value("${hibernate.dialect:org.hibernate.dialect.HSQLDialect}")
@@ -48,7 +48,6 @@ public class EmbeddedDbDataSourceConfig implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;
 
-    // Embedded DB instance, IF we are using one
     private EmbeddedDatabase embeddedDb;
 
     @Bean
@@ -61,7 +60,7 @@ public class EmbeddedDbDataSourceConfig implements ApplicationContextAware {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(applicationContext.getBean(DataSource.class));
-        sessionFactory.setPackagesToScan(new String[]{"com.jpmorgan.cakeshop.model"});
+        sessionFactory.setPackagesToScan(new String[]{"com.jpmorgan.cakeshop.node.manager.db.entity"});
         sessionFactory.setHibernateProperties(hibernateProperties());
 
         return sessionFactory;
@@ -91,13 +90,13 @@ public class EmbeddedDbDataSourceConfig implements ApplicationContextAware {
         SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
         dataSource.setDriverClass(org.hsqldb.jdbcDriver.class);
         dataSource.setUrl("jdbc:hsqldb:file:" + getDbStoragePath() + ";hsqldb.default_table_type=cached");
-        dataSource.setUsername("sdk");
-        dataSource.setPassword("sdk");
+        dataSource.setUsername("nmngr");
+        dataSource.setPassword("nmngr");
         return dataSource;
     }
 
     public String getDbStoragePath() {
-        return EmbeddedDbDataSourceConfig.class.getClassLoader().getResource("").getPath().concat("/db");
+        return System.getProperty("user.dir").concat("/embedded/nmg");
     }
 
     @Bean(name = "hsql")

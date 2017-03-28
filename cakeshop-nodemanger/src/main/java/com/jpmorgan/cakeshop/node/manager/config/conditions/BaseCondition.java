@@ -2,10 +2,6 @@ package com.jpmorgan.cakeshop.node.manager.config.conditions;
 
 import org.springframework.context.annotation.ConfigurationCondition;
 
-/**
- *
- * @author Michael Kazansky
- */
 public abstract class BaseCondition implements ConfigurationCondition {
 
     public final String ORACLE = "oracle";
@@ -13,6 +9,6 @@ public abstract class BaseCondition implements ConfigurationCondition {
     public final String POSTGRES = "postgres";
     public final String HSQL = "hsqldb";
 
-    public String databaseName = System.getProperty("cakeshop.database.vendor");
+    public String databaseName = System.getProperty("nodemanager.database.vendor");
 
 }
